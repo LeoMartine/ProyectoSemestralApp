@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="container">
+    <ion-item>
+      <ion-label position="stacked">INGRESE USUARIO</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">INGRESE PASSWORD</ion-label>
+      <ion-input name="repass" [type]="showPassword ? 'text' : 'password'"></ion-input>
+      <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+    </ion-item><br><br>
+    <ion-button shape="round" expand="block" color="secondary">Ingresar</ion-button><br>
+    <ion-button routerLink="/home" shape="round" expand="block" color="danger">Volver</ion-button>
+  </div>
+</ion-content>
