@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,10 @@ export class LoginPage implements OnInit{
   showPassword= false;
   passwordToggleIcon = 'eye';
   ingreso: FormGroup;
+  usuar: any = {
+    usser: '',
+    pass:''
+  };
   constructor(private router: Router, public fb: FormBuilder,
     public alertController: AlertController) { 
       this.ingreso = this.fb.group({
@@ -35,7 +40,12 @@ export class LoginPage implements OnInit{
         buttons: ['Aceptar']
       })
       await alert.present();
-      this.router.navigateByUrl('menu');
+      let navigationExtras: NavigationExtras = {
+        state: {
+          usuar: this.usuar
+        }
+      };
+      this.router.navigate(['/menu'], navigationExtras);
     }else{
       const alert = await this.alertController.create({
         header: 'Datos incorrectos',

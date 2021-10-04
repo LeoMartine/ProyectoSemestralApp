@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu',
@@ -7,7 +11,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuPage implements OnInit {
 
-  constructor() { }
+  usser: any;
+  constructor(public alertCtrl: AlertController, private router: Router, private activateRoute: ActivatedRoute,
+    public toastController: ToastController) {
+    this.activateRoute.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        let data = this.router.getCurrentNavigation().extras.state.usuar;
+        this.usser = data.usser;
+        console.log('bienvenido: ' + data.usser);
+      }
+  });
+   }
 
   ngOnInit() {
   }
