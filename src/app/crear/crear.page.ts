@@ -2,6 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras } from '@angular/router';
+
 
 @Component({
   selector: 'app-crear',
@@ -14,6 +16,9 @@ export class CrearPage implements OnInit{
   showPassword= false;
   passwordToggleIcon = 'eye';
   registro: FormGroup;
+  usuar: any = {
+    usser: ''
+  };
   constructor(private router: Router, public fb: FormBuilder,
     public alertController: AlertController) 
     {
@@ -46,7 +51,12 @@ export class CrearPage implements OnInit{
       correo: reg.correo
     }
     localStorage.setItem('usuario', JSON.stringify(usuario));
-    this.router.navigateByUrl('menu');
+    let navigationExtras: NavigationExtras = {
+      state: {
+        usuar: this.usuar
+      }
+    };
+    this.router.navigate(['/menu'], navigationExtras);
   }
 
   togglePassword():void{
