@@ -56,6 +56,12 @@ export class CrearPage implements OnInit{
         usuar: this.usuar
       }
     };
+    const alert = await this.alertController.create({
+      header: 'Datos correctos',
+      message: 'Bienvenido '+ usuario.nombre,
+      buttons: ['Aceptar']
+    })
+    await alert.present();
     this.router.navigate(['/menu'], navigationExtras);
   }
 
