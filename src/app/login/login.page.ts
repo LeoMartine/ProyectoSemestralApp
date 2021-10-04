@@ -29,6 +29,12 @@ export class LoginPage implements OnInit{
     var usuario = JSON.parse(localStorage.getItem('usuario'));
     if(usuario.nombre == ing.nombre && usuario.password == ing.password)
     {
+      const alert = await this.alertController.create({
+        header: 'Datos correctos',
+        message: 'Bienvenido '+ usuario.nombre,
+        buttons: ['Aceptar']
+      })
+      await alert.present();
       this.router.navigateByUrl('menu');
     }else{
       const alert = await this.alertController.create({
