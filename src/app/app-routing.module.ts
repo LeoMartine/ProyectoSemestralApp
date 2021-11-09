@@ -26,7 +26,11 @@ const routes: Routes = [
   {
     path: 'recuperar',
     loadChildren: () => import('./recuperar/recuperar.module').then( m => m.RecuperarPageModule)
+  },  {
+    path: 'edit-pass',
+    loadChildren: () => import('./edit-pass/edit-pass.module').then( m => m.EditPassPageModule)
   },
+
 ];
 
 @NgModule({
