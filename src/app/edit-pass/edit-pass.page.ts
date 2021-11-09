@@ -15,9 +15,6 @@ export class EditPassPage implements OnInit {
   showPassword= false;
   passwordToggleIcon = 'eye';
   editar: FormGroup;
-  usuar: any = {
-    usser: ''
-  };
   usser1: any;
   mail1: any;
   constructor(private router: Router, public fb: FormBuilder,
@@ -29,15 +26,15 @@ export class EditPassPage implements OnInit {
         if (this.router.getCurrentNavigation().extras.state) {
           let data = this.router.getCurrentNavigation().extras.state.usuar1;
           this.usser1 = data.usser1;
+          this.mail1 = data.mail1;
           console.log('bienvenido: ' + data.usser1 + ' ' + data.mail1);
+          this.editar = this.fb.group(
+            {
+              'nombre': new FormControl(data.usser1, Validators.required),
+              'correo': new FormControl(data.mail1, Validators.required),
+              'password': new FormControl("", Validators.required)
+            });
         }});
-      this.editar = this.fb.group(
-        {
-          'nombre': new FormControl("", Validators.required),
-          'correo': new FormControl("", Validators.required),
-          'password': new FormControl("", Validators.required),
-          'conPassword': new FormControl("", Validators.required)
-        });
     }
   ngOnInit() {
   }
@@ -59,18 +56,13 @@ export class EditPassPage implements OnInit {
       correo: reg.correo
     }
     localStorage.setItem(reg.nombre, JSON.stringify(usuario));
-    let navigationExtras: NavigationExtras = {
-      state: {
-        usuar: this.usuar
-      }
-    };
     const alert = await this.alertController.create({
       header: 'Datos correctos',
-      message: 'Bienvenido '+ usuario.nombre,
+      message: 'Estimado '+ usuario.nombre + ' su password se ha cambiado con existo!',
       buttons: ['Aceptar']
     })
     await alert.present();
-    this.router.navigate(['/menu'], navigationExtras);
+    this.router.navigate(['/login']);
   }
 
   togglePassword():void{
