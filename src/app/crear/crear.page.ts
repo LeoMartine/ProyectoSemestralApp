@@ -25,9 +25,9 @@ export class CrearPage implements OnInit{
       this.registro = this.fb.group(
         {
           'nombre': new FormControl("", Validators.required),
-          'correo': new FormControl("", Validators.required),
           'password': new FormControl("", Validators.required),
-          'conPassword': new FormControl("", Validators.required)
+          'conPassword': new FormControl("", Validators.required),
+          'correo': new FormControl("", Validators.required)
         });
     }
 

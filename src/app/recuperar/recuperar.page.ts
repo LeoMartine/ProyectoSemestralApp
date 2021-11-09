@@ -13,9 +13,8 @@ import { ActivatedRoute, NavigationExtras } from '@angular/router';
 export class RecuperarPage implements OnInit {
 
   recupe: FormGroup;
-  usuar: any = {
-    usser: '',
-    pass:''
+  usuar1: any = {
+    usser1:''
   };
   constructor(private router: Router, public fb: FormBuilder,
     public alertController: AlertController) {
@@ -35,16 +34,17 @@ export class RecuperarPage implements OnInit {
     if(usuario.nombre == mos.nombre && usuario.correo == mos.correo)
     {
       const alert = await this.alertController.create({
+        header: 'Datos correctos',
         message: 'Estimado '+usuario.nombre+' se redireccionara a editar la contraseña',
         buttons: ['Aceptar']
       })
       await alert.present();
       let navigationExtras: NavigationExtras = {
         state: {
-          usuar: this.usuar
+          usuar1: this.usuar1
         }
       };
-      this.router.navigate(['/menu'], navigationExtras);
+      this.router.navigate(['/edit-pass'], navigationExtras);
     }
     else
     {

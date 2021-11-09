@@ -14,10 +14,6 @@
             <ion-input formControlName="nombre" [(ngModel)]="usuar.usser"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="stacked">INGRESE CORREO</ion-label>
-            <ion-input formControlName="correo" type="email"></ion-input>
-          </ion-item>
-          <ion-item>
             <ion-label position="stacked">INGRESE PASSWORD</ion-label>
             <ion-input formControlName="password" name="pass" [type]="showPassword ? 'text' : 'password'"></ion-input>
             <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
@@ -26,6 +22,10 @@
             <ion-label position="stacked">RE-INGRESE PASSWORD</ion-label>
             <ion-input formControlName="conPassword" name="repass" [type]="showPassword ? 'text' : 'password'"></ion-input>
             <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">INGRESE CORREO</ion-label>
+            <ion-input formControlName="correo" type="email"></ion-input>
           </ion-item><br>
           <ion-button shape="round" expand="block" color="secondary" (click)="guardar()">Registrar</ion-button><br>
           <ion-button routerLink="/home" shape="round" expand="block" color="danger">Volver</ion-button>
