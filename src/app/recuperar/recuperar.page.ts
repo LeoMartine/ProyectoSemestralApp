@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras } from '@angular/router';
+
 
 @Component({
   selector: 'app-recuperar',
@@ -11,6 +13,10 @@ import { Router } from '@angular/router';
 export class RecuperarPage implements OnInit {
 
   recupe: FormGroup;
+  usuar: any = {
+    usser: '',
+    pass:''
+  };
   constructor(private router: Router, public fb: FormBuilder,
     public alertController: AlertController) {
       this.recupe = this.fb.group({
@@ -29,11 +35,16 @@ export class RecuperarPage implements OnInit {
     if(usuario.nombre == mos.nombre && usuario.correo == mos.correo)
     {
       const alert = await this.alertController.create({
-        message: 'Estimado '+usuario.nombre+' se ha enviado su contraseña al correo',
+        message: 'Estimado '+usuario.nombre+' se redireccionara a editar la contraseña',
         buttons: ['Aceptar']
       })
       await alert.present();
-      this.router.navigateByUrl('menu');
+      let navigationExtras: NavigationExtras = {
+        state: {
+          usuar: this.usuar
+        }
+      };
+      this.router.navigate(['/menu'], navigationExtras);
     }
     else
     {
