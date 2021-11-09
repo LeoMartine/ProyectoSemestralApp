@@ -57,7 +57,7 @@ export class EditPassPage implements OnInit {
       password: reg.password,
       correo: reg.correo
     }
-    localStorage.setItem('usuario', JSON.stringify(usuario));
+    localStorage.setItem(reg.nombre, JSON.stringify(usuario));
     let navigationExtras: NavigationExtras = {
       state: {
         usuar: this.usuar
