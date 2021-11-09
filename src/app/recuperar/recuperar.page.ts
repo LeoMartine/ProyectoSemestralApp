@@ -14,7 +14,8 @@ export class RecuperarPage implements OnInit {
 
   recupe: FormGroup;
   usuar1: any = {
-    usser1:''
+    usser1:'',
+    mail1:''
   };
   constructor(private router: Router, public fb: FormBuilder,
     public alertController: AlertController) {

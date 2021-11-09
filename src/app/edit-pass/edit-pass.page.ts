@@ -19,6 +19,7 @@ export class EditPassPage implements OnInit {
     usser: ''
   };
   usser1: any;
+  mail1: any;
   constructor(private router: Router, public fb: FormBuilder,
     public alertController: AlertController,
     private activateRoute: ActivatedRoute,
@@ -28,7 +29,7 @@ export class EditPassPage implements OnInit {
         if (this.router.getCurrentNavigation().extras.state) {
           let data = this.router.getCurrentNavigation().extras.state.usuar1;
           this.usser1 = data.usser1;
-          console.log('bienvenido: ' + data.usser1);
+          console.log('bienvenido: ' + data.usser1 + ' ' + data.mail1);
         }});
       this.editar = this.fb.group(
         {
