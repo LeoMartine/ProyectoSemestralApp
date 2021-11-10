@@ -14,13 +14,11 @@ export class RecuperarPage implements OnInit {
 
   recupe: FormGroup;
   usuar1: any = {
-    usser1:'',
     mail1:''
   };
   constructor(private router: Router, public fb: FormBuilder,
     public alertController: AlertController) {
       this.recupe = this.fb.group({
-        'nombre': new FormControl("",Validators.required),
         'correo': new FormControl("",Validators.required)
       });
     }
@@ -31,8 +29,8 @@ export class RecuperarPage implements OnInit {
   async mostrar()
   {
     var mos = this.recupe.value;
-    var usuario = JSON.parse(localStorage.getItem('usuario'));
-    if(usuario.nombre == mos.nombre && usuario.correo == mos.correo)
+    var usuario = JSON.parse(localStorage.getItem(mos.correo));
+    if(usuario.correo == mos.correo)
     {
       const alert = await this.alertController.create({
         header: 'Datos correctos',

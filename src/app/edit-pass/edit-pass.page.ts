@@ -25,12 +25,14 @@ export class EditPassPage implements OnInit {
       this.activateRoute.queryParams.subscribe(params => {
         if (this.router.getCurrentNavigation().extras.state) {
           let data = this.router.getCurrentNavigation().extras.state.usuar1;
-          this.usser1 = data.usser1;
           this.mail1 = data.mail1;
-          console.log('bienvenido: ' + data.usser1 + ' ' + data.mail1);
+          var i = JSON.parse(localStorage.getItem(this.mail1));
+          var usser1 = i.nombre;
+          this.usser1 = usser1;
+          console.log('bienvenido: ' + this.usser1 + ' ' + data.mail1);
           this.editar = this.fb.group(
             {
-              'nombre': new FormControl(data.usser1, Validators.required),
+              'nombre': new FormControl(this.usser1, Validators.required),
               'correo': new FormControl(data.mail1, Validators.required),
               'password': new FormControl("", Validators.required)
             });
@@ -53,9 +55,11 @@ export class EditPassPage implements OnInit {
     var usuario = {
       nombre: reg.nombre,
       password: reg.password,
-      correo: reg.correo
+      correo: reg.correo,
+      token: '1000300180'
+
     }
-    localStorage.setItem(reg.nombre, JSON.stringify(usuario));
+    localStorage.setItem(reg.correo, JSON.stringify(usuario));
     const alert = await this.alertController.create({
       header: 'Datos correctos',
       message: 'Estimado '+ usuario.nombre + ' su password se ha cambiado con existo!',
