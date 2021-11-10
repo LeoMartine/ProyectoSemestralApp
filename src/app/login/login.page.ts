@@ -45,6 +45,10 @@ export class LoginPage implements OnInit{
           usuar: this.usuar
         }
       };
+      var ingre = {
+        ingreso: 'true'
+      }
+      localStorage.setItem('ingresado', JSON.stringify(ingre));
       this.router.navigate(['/menu'], navigationExtras);
     }else{
       const alert = await this.alertController.create({
