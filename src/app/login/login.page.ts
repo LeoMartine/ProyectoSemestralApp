@@ -32,6 +32,15 @@ export class LoginPage implements OnInit{
   {
     var ing = this.ingreso.value;
     var usuario = JSON.parse(localStorage.getItem('usuario'));
+    if(this.ingreso.invalid){
+      const alert = await this.alertController.create({
+        header: 'Datos incompletos',
+        message: 'Tienes que llenar todos los datos',
+        buttons: ['Aceptar']
+      });
+      await alert.present();
+      return;
+    }
     if(usuario.nombre == ing.nombre && usuario.password == ing.password)
     {
       const alert = await this.alertController.create({
