@@ -31,7 +31,7 @@ export class LoginPage implements OnInit{
   async ingresar()
   {
     var ing = this.ingreso.value;
-    var usuario = JSON.parse(localStorage.getItem('usuario'));
+    var usuario = JSON.parse(localStorage.getItem(ing.nombre));
     if(this.ingreso.invalid){
       const alert = await this.alertController.create({
         header: 'Datos incompletos',
