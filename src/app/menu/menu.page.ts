@@ -42,6 +42,7 @@ export class MenuPage implements OnInit {
       buttons: ['Aceptar']
     })
     await alert.present();
+    console.log('Adiosin');
     this.router.navigate(['/home']);
   }
 }
