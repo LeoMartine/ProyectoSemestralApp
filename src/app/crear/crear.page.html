@@ -11,7 +11,7 @@
         <form [formGroup]="registro">
           <ion-item>
             <ion-label position="stacked">INGRESE USUARIO</ion-label>
-            <ion-input formControlName="nombre" [(ngModel)]="usuar.usser"></ion-input>
+            <ion-input formControlName="nombre"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">INGRESE PASSWORD</ion-label>
@@ -25,7 +25,7 @@
           </ion-item>
           <ion-item>
             <ion-label position="stacked">INGRESE CORREO</ion-label>
-            <ion-input formControlName="correo" type="email"></ion-input>
+            <ion-input formControlName="correo" type="email" [(ngModel)]="usuar.usser"></ion-input>
           </ion-item><br>
           <ion-button shape="round" expand="block" color="secondary" (click)="guardar()">Registrar</ion-button><br>
           <ion-button routerLink="/home" shape="round" expand="block" color="danger">Volver</ion-button>

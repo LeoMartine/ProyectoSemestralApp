@@ -12,13 +12,17 @@ import { ToastController } from '@ionic/angular';
 export class MenuPage implements OnInit {
 
   usser: any;
+  s: any;
   constructor(public alertController: AlertController, private router: Router, private activateRoute: ActivatedRoute,
     public toastController: ToastController) {
     this.activateRoute.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         let data = this.router.getCurrentNavigation().extras.state.usuar;
         this.usser = data.usser;
-        console.log('bienvenido: ' + data.usser);
+        var i = JSON.parse(localStorage.getItem(this.usser));
+        var s = i.nombre;
+        this.s = s;
+        console.log('bienvenido: ' + this.s + ' ' + data.usser);
       }
   });
    }

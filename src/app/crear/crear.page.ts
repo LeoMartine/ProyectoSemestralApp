@@ -49,12 +49,13 @@ export class CrearPage implements OnInit{
     var usuario = {
       nombre: reg.nombre,
       password: reg.password,
-      correo: reg.correo
+      correo: reg.correo,
+      token: '1000300180'
     }
     var ingre = {
       ingreso: 'true'
     }
-    localStorage.setItem(reg.nombre, JSON.stringify(usuario));
+    localStorage.setItem(reg.correo, JSON.stringify(usuario));
     localStorage.setItem('ingresado', JSON.stringify(ingre));
     let navigationExtras: NavigationExtras = {
       state: {

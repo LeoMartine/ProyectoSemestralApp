@@ -41,7 +41,7 @@ export class LoginPage implements OnInit{
       await alert.present();
       return;
     }
-    if(usuario.nombre == ing.nombre && usuario.password == ing.password)
+    if(usuario.correo == ing.nombre && usuario.password == ing.password)
     {
       const alert = await this.alertController.create({
         header: 'Datos correctos',
