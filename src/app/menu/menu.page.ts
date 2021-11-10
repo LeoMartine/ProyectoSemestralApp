@@ -12,7 +12,7 @@ import { ToastController } from '@ionic/angular';
 export class MenuPage implements OnInit {
 
   usser: any;
-  constructor(public alertCtrl: AlertController, private router: Router, private activateRoute: ActivatedRoute,
+  constructor(public alertController: AlertController, private router: Router, private activateRoute: ActivatedRoute,
     public toastController: ToastController) {
     this.activateRoute.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -26,4 +26,18 @@ export class MenuPage implements OnInit {
   ngOnInit() {
   }
 
+  async logout()
+  {
+    var ingre = {
+      ingreso: 'false'
+    }
+    localStorage.setItem('ingresado', JSON.stringify(ingre));
+    const alert = await this.alertController.create({
+      header: 'Cerrando Sesion',
+      message: 'Adiosin.',
+      buttons: ['Aceptar']
+    })
+    await alert.present();
+    this.router.navigate(['/home']);
+  }
 }
