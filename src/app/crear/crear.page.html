@@ -10,17 +10,16 @@
       <ion-col>
         <form [formGroup]="registro">
           <ion-item>
-            <ion-label position="stacked">INGRESE USUARIO</ion-label>
+            <ion-label position="stacked">INGRESE NOMBRE</ion-label>
             <ion-input formControlName="nombre"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">INGRESE APELLIDOS</ion-label>
+            <ion-input formControlName="apellidos"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">INGRESE PASSWORD</ion-label>
             <ion-input formControlName="password" name="pass" [type]="showPassword ? 'text' : 'password'"></ion-input>
-            <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
-          </ion-item>
-          <ion-item>
-            <ion-label position="stacked">RE-INGRESE PASSWORD</ion-label>
-            <ion-input formControlName="conPassword" name="repass" [type]="showPassword ? 'text' : 'password'"></ion-input>
             <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
           </ion-item>
           <ion-item>

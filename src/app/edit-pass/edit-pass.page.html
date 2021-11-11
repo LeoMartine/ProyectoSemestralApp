@@ -9,11 +9,15 @@
       <ion-col>
         <form [formGroup]="editar">
           <ion-item>
-            <ion-label position="stacked">USUARIO</ion-label>
+            <ion-label position="stacked">NOMBRE</ion-label>
             <ion-input formControlName="nombre" disabled="true"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="stacked">INGRESE CORREO</ion-label>
+            <ion-label position="stacked">APELLIDOS</ion-label>
+            <ion-input formControlName="apellidos" type="email" disabled="true"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">CORREO</ion-label>
             <ion-input formControlName="correo" type="email" disabled="true"></ion-input>
           </ion-item>
           <ion-item>

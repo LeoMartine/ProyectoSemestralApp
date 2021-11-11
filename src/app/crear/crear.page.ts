@@ -25,8 +25,8 @@ export class CrearPage implements OnInit{
       this.registro = this.fb.group(
         {
           'nombre': new FormControl("", Validators.required),
+          'apellidos': new FormControl("", Validators.required),
           'password': new FormControl("", Validators.required),
-          'conPassword': new FormControl("", Validators.required),
           'correo': new FormControl("", Validators.required)
         });
     }
@@ -48,6 +48,7 @@ export class CrearPage implements OnInit{
     }
     var usuario = {
       nombre: reg.nombre,
+      apellidos: reg.apellidos,
       password: reg.password,
       correo: reg.correo,
       token: '1000300180'

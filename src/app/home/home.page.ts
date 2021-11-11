@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiTokenService } from '../servicios/api-token.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private api: ApiTokenService) {}
 
+  ObtUsuario()
+  {
+    this.api.getObtUsuario().subscribe((resultado)=>{
+      console.log(resultado);
+    })
+  }
 }

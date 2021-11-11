@@ -16,6 +16,7 @@ export class EditPassPage implements OnInit {
   passwordToggleIcon = 'eye';
   editar: FormGroup;
   usser1: any;
+  apes1: any;
   mail1: any;
   constructor(private router: Router, public fb: FormBuilder,
     public alertController: AlertController,
@@ -28,11 +29,14 @@ export class EditPassPage implements OnInit {
           this.mail1 = data.mail1;
           var i = JSON.parse(localStorage.getItem(this.mail1));
           var usser1 = i.nombre;
+          var apes1 = i.apellidos;
           this.usser1 = usser1;
-          console.log('bienvenido: ' + this.usser1 + ' ' + data.mail1);
+          this.apes1 = apes1;
+          console.log('bienvenido: ' + this.usser1 + ' ' + this.apes1 + ' ' + data.mail1);
           this.editar = this.fb.group(
             {
               'nombre': new FormControl(this.usser1, Validators.required),
+              'apellidos': new FormControl(this.apes1, Validators.required),
               'correo': new FormControl(data.mail1, Validators.required),
               'password': new FormControl("", Validators.required)
             });
@@ -54,6 +58,7 @@ export class EditPassPage implements OnInit {
     }
     var usuario = {
       nombre: reg.nombre,
+      apellidos: reg.apellidos,
       password: reg.password,
       correo: reg.correo,
       token: '1000300180'
