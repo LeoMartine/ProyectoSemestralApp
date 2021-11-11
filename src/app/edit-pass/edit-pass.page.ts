@@ -61,7 +61,7 @@ export class EditPassPage implements OnInit {
       apellidos: reg.apellidos,
       password: reg.password,
       correo: reg.correo,
-      token: '1000300180'
+      token_equipo: '1000300180'
 
     }
     localStorage.setItem(reg.correo, JSON.stringify(usuario));

@@ -51,7 +51,7 @@ export class CrearPage implements OnInit{
       apellidos: reg.apellidos,
       password: reg.password,
       correo: reg.correo,
-      token: '1000300180'
+      token_equipos: '1000300180'
     }
     var ingre = {
       ingreso: 'true'

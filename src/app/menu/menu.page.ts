@@ -32,10 +32,7 @@ export class MenuPage implements OnInit {
 
   async logout()
   {
-    var ingre = {
-      ingreso: 'false'
-    }
-    localStorage.setItem('ingresado', JSON.stringify(ingre));
+    localStorage.removeItem('ingresado');
     const alert = await this.alertController.create({
       header: 'Cerrando Sesion',
       message: 'Adiosin.',

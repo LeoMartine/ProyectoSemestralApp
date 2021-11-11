@@ -15,5 +15,4 @@ export class ApiTokenService {
   {
     return this.http.get(this.apiBase+"/usuarios/1000300180").pipe();
   }
-
 }

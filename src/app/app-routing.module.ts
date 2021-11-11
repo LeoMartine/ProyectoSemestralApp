@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NoIngresarGuard } from './no-ingresar.guard';
+import { IngresarGuard } from './ingresar.guard';
 
 const routes: Routes = [
   {
@@ -13,22 +15,32 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    canActivate: [NoIngresarGuard]
   },
   {
     path: 'crear',
-    loadChildren: () => import('./crear/crear.module').then( m => m.CrearPageModule)
+    loadChildren: () => import('./crear/crear.module').then( m => m.CrearPageModule),
+    canActivate: [NoIngresarGuard]
   },
   {
     path: 'menu',
-    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
+    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule),
+    canActivate: [IngresarGuard]
   },
   {
     path: 'recuperar',
-    loadChildren: () => import('./recuperar/recuperar.module').then( m => m.RecuperarPageModule)
-  },  {
+    loadChildren: () => import('./recuperar/recuperar.module').then( m => m.RecuperarPageModule),
+    canActivate: [NoIngresarGuard]
+  },
+  {
     path: 'edit-pass',
-    loadChildren: () => import('./edit-pass/edit-pass.module').then( m => m.EditPassPageModule)
+    loadChildren: () => import('./edit-pass/edit-pass.module').then( m => m.EditPassPageModule),
+    canActivate: [NoIngresarGuard]
+  },
+  {
+    path: 'apis',
+    loadChildren: () => import('./apis/apis.module').then( m => m.ApisPageModule)
   },
 
 ];
