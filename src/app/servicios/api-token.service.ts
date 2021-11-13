@@ -7,12 +7,22 @@ import { Observable } from 'rxjs';
 })
 export class ApiTokenService {
 
-  apiBase = 'https://emprende.asistenciataller.cl/API/v2';
+  apiBase = 'https://emprende.asistenciataller.cl/API/v2/';
 
   constructor(private http: HttpClient) { }
 
   getObtUsuario(): Observable<any>
   {
-    return this.http.get(this.apiBase+"/usuarios/1000300180").pipe();
+    return this.http.get(this.apiBase+"usuarios/1000300180").pipe();
+  }
+
+  postCrear(datos)
+  {
+    return this.http.post(this.apiBase+'crearUsuario', datos).pipe();
+  }
+
+  postModificar(datos)
+  {
+    return this.http.post(this.apiBase+'modificarPassword', datos).pipe();
   }
 }

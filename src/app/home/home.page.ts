@@ -9,11 +9,5 @@ import { ApiTokenService } from '../servicios/api-token.service';
 export class HomePage {
 
   constructor(private api: ApiTokenService) {}
-
-  ObtUsuario()
-  {
-    this.api.getObtUsuario().subscribe((resultado)=>{
-      console.log(resultado);
-    })
-  }
+  
 }

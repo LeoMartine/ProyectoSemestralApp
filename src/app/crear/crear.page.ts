@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ActivatedRoute, NavigationExtras } from '@angular/router';
-
+import { ApiTokenService } from '../servicios/api-token.service';
 
 @Component({
   selector: 'app-crear',
@@ -20,7 +20,7 @@ export class CrearPage implements OnInit{
     usser: ''
   };
   constructor(private router: Router, public fb: FormBuilder,
-    public alertController: AlertController) 
+    public alertController: AlertController, private api: ApiTokenService) 
     {
       this.registro = this.fb.group(
         {
@@ -58,6 +58,9 @@ export class CrearPage implements OnInit{
     }
     localStorage.setItem(reg.correo, JSON.stringify(usuario));
     localStorage.setItem('ingresado', JSON.stringify(ingre));
+    this.api.postCrear({"nombre": reg.nombre,"apellidos": reg.apellidos,"correo": reg.correo,"password": reg.password,"token_equipo": 1000300180}).subscribe((res)=>{
+      console.log(res);
+    })
     let navigationExtras: NavigationExtras = {
       state: {
         usuar: this.usuar
