@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ActivatedRoute, NavigationExtras } from '@angular/router';
+import { ApiTokenService } from '../servicios/api-token.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginPage implements OnInit{
     pass:''
   };
   constructor(private router: Router, public fb: FormBuilder,
-    public alertController: AlertController) { 
+    public alertController: AlertController, private api: ApiTokenService) { 
       this.ingreso = this.fb.group({
         'nombre': new FormControl("",Validators.required),
         'password': new FormControl("",Validators.required)
@@ -58,6 +59,9 @@ export class LoginPage implements OnInit{
         ingreso: 'true'
       }
       localStorage.setItem('ingresado', JSON.stringify(ingre));
+      this.api.postLogin({"correo": ing.nombre,"password": ing.password,"token_equipo": 1000300180}).subscribe((res)=>{
+        console.log(res);
+      })
       this.router.navigate(['/menu'], navigationExtras);
     }else{
       const alert = await this.alertController.create({
