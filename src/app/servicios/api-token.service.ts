@@ -21,6 +21,11 @@ export class ApiTokenService {
     return this.http.post(this.apiBase+'crearUsuario', datos).pipe();
   }
 
+  postLogin(datos)
+  {
+    return this.http.post(this.apiBase+'loginUsuario', datos).pipe();
+  }
+  
   postModificar(datos)
   {
     return this.http.post(this.apiBase+'modificarPassword', datos).pipe();
