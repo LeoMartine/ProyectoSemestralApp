@@ -59,9 +59,9 @@ export class LoginPage implements OnInit{
         ingreso: 'true'
       }
       localStorage.setItem('ingresado', JSON.stringify(ingre));
-      this.api.postLogin({"correo": ing.nombre,"password": ing.password,"token_equipo": 1000300180}).subscribe((res)=>{
-        console.log(res);
-      })
+      //this.api.postLogin({"correo": ing.nombre,"password": ing.password,"token_equipo": 1000300180}).subscribe((res)=>{
+        //console.log(res);
+      //})
       this.router.navigate(['/menu'], navigationExtras);
     }else{
       const alert = await this.alertController.create({
