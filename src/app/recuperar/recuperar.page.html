@@ -13,8 +13,13 @@
             <ion-label position="stacked">INGRESE CORREO</ion-label>
             <ion-input formControlName="correo" [(ngModel)]="usuar1.mail1"></ion-input>
           </ion-item>
+          <ion-item>
+            <ion-label position="stacked">INGRESE PASSWORD</ion-label>
+            <ion-input formControlName="password"  name="pass" [type]="showPassword ? 'text' : 'password'"></ion-input>
+            <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+          </ion-item>
           <br>
-          <ion-button shape="round" expand="block" color="secondary" (click)="mostrar()">Ingresar</ion-button><br>
+          <ion-button shape="round" expand="block" color="secondary" (click)="mostrar2()">Ingresar</ion-button><br>
           <ion-button routerLink="/login" shape="round" expand="block" color="danger">Volver</ion-button>  
         </form>
       </ion-col>
