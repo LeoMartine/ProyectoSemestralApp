@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { ApiTokenService } from '../servicios/api-token.service';
 
 
@@ -9,7 +11,8 @@ import { ApiTokenService } from '../servicios/api-token.service';
 })
 export class ApisPage implements OnInit {
 
-  constructor(private api: ApiTokenService) {}
+  constructor(private router: Router,
+    public alertController: AlertController, private api: ApiTokenService) {}
 
   ngOnInit() {
   }
@@ -33,9 +36,33 @@ export class ApisPage implements OnInit {
     this.api.postLogin(
       {
         "correo": "se.vidall@profesor.duoc.cl","password": "09876","token_equipo": 1000300180
-      }).subscribe((res)=>
+      }).subscribe(async(res)=>
       {
-        console.log(res);    
+        console.log(res); 
+        var result = JSON.stringify(res);
+        var resp = JSON.parse(result);
+        if(resp.result === 'Login incorrecto')
+        {
+          const alert = await this.alertController.create({
+            header: 'Datos incorrectos',
+            message: 'Los datos que ingresaste son incorrectos.',
+            buttons: ['Aceptar']
+          })
+          await alert.present();
+        }
+        else
+        {
+          const alert = await this.alertController.create({
+            header: 'Datos correctos',
+            message: 'Bienvenido ',
+            buttons: ['Aceptar']
+          })
+          var ingre = {
+            ingreso: 'true'
+          }
+          localStorage.setItem('ingresado', JSON.stringify(ingre));
+          this.router.navigate(['/menu']);   
+        }
       })
   }
 
