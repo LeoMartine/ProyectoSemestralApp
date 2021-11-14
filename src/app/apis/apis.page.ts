@@ -30,9 +30,13 @@ export class ApisPage implements OnInit {
 
   logMiUsuario()
   {
-    this.api.postLogin({"correo": "se.vidall@profesor.duoc.cl","password": "09876","token_equipo": 1000300180}).subscribe((res)=>{
-      console.log(res);
-    })
+    this.api.postLogin(
+      {
+        "correo": "se.vidall@profesor.duoc.cl","password": "09876","token_equipo": 1000300180
+      }).subscribe((res)=>
+      {
+        console.log(res);    
+      })
   }
 
   modMiUsuario()

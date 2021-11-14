@@ -29,7 +29,7 @@ export class LoginPage implements OnInit{
   ngOnInit() {
   }
 
-  async ingresar()
+  async ingresar() //Login basado en LocalStorage
   {
     var ing = this.ingreso.value;
     var usuario = JSON.parse(localStorage.getItem(ing.nombre));
@@ -71,6 +71,50 @@ export class LoginPage implements OnInit{
       })
       await alert.present();
     }
+  }
+
+  ingresar2() //Login basado en API
+  {
+    var ing = this.ingreso.value;
+    var login = {
+      "correo": ing.nombre,
+      "password": ing.password,
+      "token_equipo": 1000300180
+    }
+    this.api.postLogin(login).subscribe(async(resultado)=>
+      {
+        console.log(resultado);
+        var result = JSON.stringify(resultado);
+        var resp = JSON.parse(result);
+        if(resp.result === 'Login incorrecto')
+        {
+          const alert = await this.alertController.create({
+            header: 'Datos incorrectos',
+            message: 'Los datos que ingresaste son incorrectos.',
+            buttons: ['Aceptar']
+          })
+          await alert.present();
+        }
+        else
+        {
+          const alert = await this.alertController.create({
+            header: 'Datos correctos',
+            message: 'Bienvenido '+ ing.nombre,
+            buttons: ['Aceptar']
+          })
+          await alert.present();
+          let navigationExtras: NavigationExtras = {
+            state: {
+              usuar: this.usuar
+            }
+          };
+          var ingre = {
+            ingreso: 'true'
+          }
+          localStorage.setItem('ingresado', JSON.stringify(ingre));
+          this.router.navigate(['/menu'], navigationExtras);
+        }
+      })
   }
 
   togglePassword():void{
