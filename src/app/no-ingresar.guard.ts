@@ -19,7 +19,15 @@ export class NoIngresarGuard implements CanActivate {
       }
       else
       {
-        return true;
+        if(localStorage.getItem('ingresadoA'))
+        {
+          this.router.navigate(['/menu2']);
+          return false;
+        }
+        else
+        {
+          return true;
+        }
       }
   }
   

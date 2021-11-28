@@ -133,7 +133,7 @@ export class LoginPage implements OnInit{
             var ingre = {
               ingreso: 'true'
             }
-            localStorage.setItem('ingresado', JSON.stringify(ingre));
+            localStorage.setItem('ingresadoA', JSON.stringify(ingre));
             localStorage.setItem('login', JSON.stringify(resp.result[0]));
             this.router.navigate(['/menu2'], navigationExtras);
           }

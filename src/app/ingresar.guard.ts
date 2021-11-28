@@ -18,8 +18,15 @@ export class IngresarGuard implements CanActivate {
     }
     else
     {
-      this.router.navigate(['/login']);
-      return false;
+      if(localStorage.getItem('ingresadoA'))
+      {
+        return true;
+      }
+      else
+      {
+        this.router.navigate(['/login']);
+        return false;
+      }
     }
   }
   

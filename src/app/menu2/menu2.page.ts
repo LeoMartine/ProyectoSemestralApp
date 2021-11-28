@@ -33,7 +33,7 @@ export class Menu2Page implements OnInit {
 
   async logout()
   {
-    localStorage.removeItem('ingresado');
+    localStorage.removeItem('ingresadoA');
     localStorage.removeItem('login');
     const alert = await this.alertController.create({
       header: 'Cerrando Sesion',

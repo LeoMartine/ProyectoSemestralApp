@@ -88,7 +88,7 @@ export class CrearPage implements OnInit{
         ingreso: 'true'
       }
       localStorage.setItem('login', JSON.stringify(usuario));
-      localStorage.setItem('ingresado', JSON.stringify(ingre));
+      localStorage.setItem('ingresadoA', JSON.stringify(ingre));
       this.api.postCrear({"nombre": reg.nombre,"apellidos": reg.apellidos,"correo": reg.correo,"password": reg.password,"token_equipo": 1000300180}).subscribe((res)=>{
         console.log(res);
       })
