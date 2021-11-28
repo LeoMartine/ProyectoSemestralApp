@@ -11,6 +11,7 @@ import { ApiTokenService } from '../servicios/api-token.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit{
+  public rol:boolean = true;
   showPassword= false;
   passwordToggleIcon = 'eye';
   ingreso: FormGroup;
@@ -22,7 +23,8 @@ export class LoginPage implements OnInit{
     public alertController: AlertController, private api: ApiTokenService) { 
       this.ingreso = this.fb.group({
         'nombre': new FormControl("",Validators.pattern("[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})")),
-        'password': new FormControl("",Validators.required)
+        'password': new FormControl("",Validators.required),
+        'rol': new FormControl()
       });
     }
   
@@ -97,27 +99,52 @@ export class LoginPage implements OnInit{
         }
         else
         {
-          const alert = await this.alertController.create({
-            header: 'Datos correctos',
-            message: 'Bienvenido a la Plataforma',
-            buttons: ['Aceptar']
-          })
-          await alert.present();
-          let navigationExtras: NavigationExtras = {
-            state: {
-              usuar: this.usuar
+          if(this.rol == false){
+            const alert = await this.alertController.create({
+              header: 'Datos correctos',
+              message: 'Bienvenido Docente',
+              buttons: ['Aceptar']
+            })
+            await alert.present();
+            let navigationExtras: NavigationExtras = {
+              state: {
+                usuar: this.usuar
+              }
+            };
+            var ingre = {
+              ingreso: 'true'
             }
-          };
-          var ingre = {
-            ingreso: 'true'
+            localStorage.setItem('ingresado', JSON.stringify(ingre));
+            localStorage.setItem('login', JSON.stringify(resp.result[0]));
+            this.router.navigate(['/menu'], navigationExtras);
           }
-          localStorage.setItem('ingresado', JSON.stringify(ingre));
-          localStorage.setItem('login', JSON.stringify(resp.result[0]));
-          this.router.navigate(['/menu'], navigationExtras);
+          else{
+            const alert = await this.alertController.create({
+              header: 'Datos correctos',
+              message: 'Bienvenido Alumno',
+              buttons: ['Aceptar']
+            })
+            await alert.present();
+            let navigationExtras: NavigationExtras = {
+              state: {
+                usuar: this.usuar
+              }
+            };
+            var ingre = {
+              ingreso: 'true'
+            }
+            localStorage.setItem('ingresado', JSON.stringify(ingre));
+            localStorage.setItem('login', JSON.stringify(resp.result[0]));
+            this.router.navigate(['/menu2'], navigationExtras);
+          }
         }
       })
   }
 
+  change()
+  {
+    console.log(this.rol);
+  }
   togglePassword():void{
     this.showPassword =!this.showPassword;
     if(this.passwordToggleIcon == 'eye')

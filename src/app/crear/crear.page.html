@@ -26,6 +26,11 @@
             <ion-label position="stacked">INGRESE CORREO</ion-label>
             <ion-label class="correoL" position="stacked">(Ej: Usuario@correo.com)</ion-label>
             <ion-input formControlName="correo" type="email" [(ngModel)]="usuar.usser"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <ion-toggle formControlName="rol" (ionChange)="change()" [(ngModel)]="rol" name="rol"></ion-toggle>
+            <ion-icon name="people-circle-outline"></ion-icon>
           </ion-item><br>
           <ion-button shape="round" expand="block" color="secondary" (click)="guardar()">Registrar</ion-button><br>
           <ion-button routerLink="/home" shape="round" expand="block" color="danger">Volver</ion-button>

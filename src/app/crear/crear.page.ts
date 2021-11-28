@@ -13,6 +13,7 @@ import { ApiTokenService } from '../servicios/api-token.service';
 
 export class CrearPage implements OnInit{
 
+  public rol:boolean = true;
   showPassword= false;
   passwordToggleIcon = 'eye';
   registro: FormGroup;
@@ -27,7 +28,8 @@ export class CrearPage implements OnInit{
           'nombre': new FormControl("", Validators.required),
           'apellidos': new FormControl("", Validators.required),
           'password': new FormControl("", Validators.required),
-          'correo': new FormControl("", Validators.pattern("[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"))
+          'correo': new FormControl("", Validators.pattern("[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})")),
+          'rol': new FormControl()
         });
     }
 
@@ -46,34 +48,69 @@ export class CrearPage implements OnInit{
       await alert.present();
       return;
     }
-    var usuario = {
-      nombre: reg.nombre,
-      apellidos: reg.apellidos,
-      password: reg.password,
-      correo: reg.correo
-    }
-    var ingre = {
-      ingreso: 'true'
-    }
-    localStorage.setItem('login', JSON.stringify(usuario));
-    localStorage.setItem('ingresado', JSON.stringify(ingre));
-    this.api.postCrear({"nombre": reg.nombre,"apellidos": reg.apellidos,"correo": reg.correo,"password": reg.password,"token_equipo": 1000300180}).subscribe((res)=>{
-      console.log(res);
-    })
-    let navigationExtras: NavigationExtras = {
-      state: {
-        usuar: this.usuar
+    if(this.rol == false)
+    {
+      var usuario = {
+        nombre: reg.nombre,
+        apellidos: reg.apellidos,
+        password: reg.password,
+        correo: reg.correo
       }
-    };
-    const alert = await this.alertController.create({
-      header: 'Datos correctos',
-      message: 'Bienvenido '+ usuario.nombre,
-      buttons: ['Aceptar']
-    })
-    await alert.present();
-    this.router.navigate(['/menu'], navigationExtras);
+      var ingre = {
+        ingreso: 'true'
+      }
+      localStorage.setItem('login', JSON.stringify(usuario));
+      localStorage.setItem('ingresado', JSON.stringify(ingre));
+      this.api.postCrear({"nombre": reg.nombre,"apellidos": reg.apellidos,"correo": reg.correo,"password": reg.password,"token_equipo": 1000300180}).subscribe((res)=>{
+        console.log(res);
+      })
+      let navigationExtras: NavigationExtras = {
+        state: {
+          usuar: this.usuar
+        }
+      };
+      const alert = await this.alertController.create({
+        header: 'Datos correctos',
+        message: 'Bienvenido Docente',
+        buttons: ['Aceptar']
+      })
+      await alert.present();
+      this.router.navigate(['/menu'], navigationExtras);
+    }
+    else{
+      var usuario = {
+        nombre: reg.nombre,
+        apellidos: reg.apellidos,
+        password: reg.password,
+        correo: reg.correo
+      }
+      var ingre = {
+        ingreso: 'true'
+      }
+      localStorage.setItem('login', JSON.stringify(usuario));
+      localStorage.setItem('ingresado', JSON.stringify(ingre));
+      this.api.postCrear({"nombre": reg.nombre,"apellidos": reg.apellidos,"correo": reg.correo,"password": reg.password,"token_equipo": 1000300180}).subscribe((res)=>{
+        console.log(res);
+      })
+      let navigationExtras: NavigationExtras = {
+        state: {
+          usuar: this.usuar
+        }
+      };
+      const alert = await this.alertController.create({
+        header: 'Datos correctos',
+        message: 'Bienvenido Alumno',
+        buttons: ['Aceptar']
+      })
+      await alert.present();
+      this.router.navigate(['/menu2'], navigationExtras);
+    }
   }
 
+  change()
+  {
+    console.log(this.rol);
+  }
   togglePassword():void{
     this.showPassword =!this.showPassword;
     if(this.passwordToggleIcon == 'eye')
