@@ -27,7 +27,7 @@ export class CrearPage implements OnInit{
           'nombre': new FormControl("", Validators.required),
           'apellidos': new FormControl("", Validators.required),
           'password': new FormControl("", Validators.required),
-          'correo': new FormControl("", Validators.required)
+          'correo': new FormControl("", Validators.pattern("[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"))
         });
     }
 
@@ -39,8 +39,8 @@ export class CrearPage implements OnInit{
     var reg = this.registro.value;
     if(this.registro.invalid){
       const alert = await this.alertController.create({
-        header: 'Datos incompletos',
-        message: 'Tienes que llenar todos los datos',
+        header: 'Datos incorrectos',
+        message: 'Tienes que validar todos los datos ingresados',
         buttons: ['Aceptar']
       });
       await alert.present();
@@ -50,13 +50,12 @@ export class CrearPage implements OnInit{
       nombre: reg.nombre,
       apellidos: reg.apellidos,
       password: reg.password,
-      correo: reg.correo,
-      token_equipos: '1000300180'
+      correo: reg.correo
     }
     var ingre = {
       ingreso: 'true'
     }
-    localStorage.setItem(reg.correo, JSON.stringify(usuario));
+    localStorage.setItem('login', JSON.stringify(usuario));
     localStorage.setItem('ingresado', JSON.stringify(ingre));
     this.api.postCrear({"nombre": reg.nombre,"apellidos": reg.apellidos,"correo": reg.correo,"password": reg.password,"token_equipo": 1000300180}).subscribe((res)=>{
       console.log(res);

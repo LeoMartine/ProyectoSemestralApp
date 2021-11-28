@@ -21,7 +21,7 @@ export class LoginPage implements OnInit{
   constructor(private router: Router, public fb: FormBuilder,
     public alertController: AlertController, private api: ApiTokenService) { 
       this.ingreso = this.fb.group({
-        'nombre': new FormControl("",Validators.required),
+        'nombre': new FormControl("",Validators.pattern("[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})")),
         'password': new FormControl("",Validators.required)
       });
     }
@@ -99,7 +99,7 @@ export class LoginPage implements OnInit{
         {
           const alert = await this.alertController.create({
             header: 'Datos correctos',
-            message: 'Bienvenido '+ ing.nombre,
+            message: 'Bienvenido a la Plataforma',
             buttons: ['Aceptar']
           })
           await alert.present();
@@ -112,6 +112,7 @@ export class LoginPage implements OnInit{
             ingreso: 'true'
           }
           localStorage.setItem('ingresado', JSON.stringify(ingre));
+          localStorage.setItem('login', JSON.stringify(resp.result[0]));
           this.router.navigate(['/menu'], navigationExtras);
         }
       })

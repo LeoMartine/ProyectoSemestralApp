@@ -23,7 +23,7 @@ export class RecuperarPage implements OnInit {
     private activateRoute: ActivatedRoute, 
     private api: ApiTokenService) {
       this.recupe = this.fb.group({
-        'correo': new FormControl("",Validators.required),
+        'correo': new FormControl("", Validators.pattern("[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})")),
         'password': new FormControl("",Validators.required)
       });
     }
@@ -54,7 +54,7 @@ export class RecuperarPage implements OnInit {
     {
       const alert = await this.alertController.create({
         header: 'Datos incorrectos',
-        message: 'Los datos que ingresaste son incorrectos.',
+        message: 'Tienes que llenar todos los datos',
         buttons: ['Aceptar']
       })
       await alert.present();
