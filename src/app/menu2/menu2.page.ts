@@ -37,7 +37,7 @@ export class Menu2Page implements OnInit {
   ngOnInit() {
   }
 
-  start()
+  async asistenciaClases()
   {
     if(this.contador == undefined)
     {
@@ -65,6 +65,21 @@ export class Menu2Page implements OnInit {
         }
       })
     }
+    var a = JSON.parse(localStorage.getItem('login'));
+    var nom = a.nombre+' '+a.apellidos;
+    var asis = {
+      nombre: nom,
+      correo: a.correo,
+      token_equipo: '1000300180'
+    }
+    this.api.postConfirmarAsistencia(asis).subscribe((res => {
+      console.log(res);
+    }))
+    const alert = await this.alertController.create({
+      header: 'Datos Enviados',
+      buttons: ['Aceptar']
+    })
+    await alert.present();
   }
 
   stop()

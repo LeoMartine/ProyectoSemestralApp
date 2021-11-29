@@ -31,4 +31,8 @@ export class ApiTokenService {
   {
     return this.http.post(this.apiBase+'modificarPassword', datos).pipe();
   }
+
+  postConfirmarAsistencia(asistencia) {
+    return this.http.post(this.apiBase + 'enviarCorreoAsistencia', asistencia).pipe();
+  }
 }
