@@ -69,6 +69,7 @@ export class Menu2Page implements OnInit {
 
   stop()
   {
+    localStorage.setItem('tiempo', this.dia+':'+this.hora+':'+this.minutos);
     clearInterval(this.contador);
     this.dia = 0;
     this.hora = 0;
@@ -80,6 +81,7 @@ export class Menu2Page implements OnInit {
   {
     localStorage.removeItem('ingresadoA');
     localStorage.removeItem('login');
+    localStorage.removeItem('tiempo');
     const alert = await this.alertController.create({
       header: 'Cerrando Sesion',
       message: 'Adiosin.',
