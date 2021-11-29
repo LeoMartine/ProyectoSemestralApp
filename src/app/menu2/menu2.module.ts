@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { Menu2PageRoutingModule } from './menu2-routing.module';
 
 import { Menu2Page } from './menu2.page';
+//import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { Menu2Page } from './menu2.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
+    //BarcodeScanner,
     Menu2PageRoutingModule
   ],
   declarations: [Menu2Page]
