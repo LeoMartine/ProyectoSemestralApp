@@ -8,7 +8,12 @@
   <div id="container">
     <br><ion-label>Bienvenido, {{this.s}}</ion-label>
     <ion-button shape="round" size ="large" expand="block" color="secondary" (click)="asistenciaClases()">Escanear Clase</ion-button>
-    <div>
+    <div *ngIf="datoscan">
+      <p>
+        contenido: {{datoscaneado["text"]}}
+      </p>
+    </div>
+    <div>     
       <p id="crono">{{dia}} : {{hora}} : {{minutos}}</p>
     </div>
     <ion-button shape="round" size ="large" expand="block" color="secondary" (click)="stop()">Terminar Clase</ion-button>
