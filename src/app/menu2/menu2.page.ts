@@ -12,6 +12,12 @@ import { ApiTokenService } from '../servicios/api-token.service';
 })
 export class Menu2Page implements OnInit {
 
+  public hora:number = 0;
+  public dia:number = 0;
+  public minutos:number = 0;
+  public segundos:number = 0;
+  public contador:any;
+
   usser: any;
   s: any;
   constructor(public alertController: AlertController, private router: Router, private activateRoute: ActivatedRoute,
@@ -31,6 +37,45 @@ export class Menu2Page implements OnInit {
   ngOnInit() {
   }
 
+  start()
+  {
+    if(this.contador == undefined)
+    {
+      this.contador = setInterval( ()=>
+      {
+        this.segundos +=0.25;
+        if(this.segundos == 60)
+        {
+          this.segundos = 0;
+          this.minutos +=1;
+          if(this.minutos == 60)
+          {
+            this.minutos = 0;
+            this.hora +=1;
+            if(this.hora == 24)
+            {
+              this.hora = 0;
+              this.dia += 1;
+              if(this.dia == 30)
+              {
+                this.dia = 0;
+              }
+            }
+          }
+        }
+      })
+    }
+  }
+
+  stop()
+  {
+    clearInterval(this.contador);
+    this.dia = 0;
+    this.hora = 0;
+    this.minutos = 0;
+    this.segundos = 0;
+    this.contador = null;
+  }
   async logout()
   {
     localStorage.removeItem('ingresadoA');
