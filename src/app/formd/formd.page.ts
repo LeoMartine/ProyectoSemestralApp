@@ -16,7 +16,9 @@ export class FormdPage implements OnInit {
   usser: any;
   s: any;
   registroC: FormGroup;
-  crearCod: any;
+  crearCod: null;
+  qrData1: null;
+  qrData2: null;
   constructor(public alertController: AlertController, private router: Router, private activateRoute: ActivatedRoute,
     public toastController: ToastController, public fb: FormBuilder, public api: ApiTokenService) {
       var i = JSON.parse(localStorage.getItem('login'));
@@ -60,6 +62,6 @@ export class FormdPage implements OnInit {
       buttons: ['Aceptar']
     })
     await alert.present();
-    this.crearCod = 'Nombre de clase: '+reg.clase+', Fecha: '+reg.horaI;
+    this.crearCod = this.qrData1;
   }
 }

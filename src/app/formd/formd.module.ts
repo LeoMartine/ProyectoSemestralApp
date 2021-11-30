@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormdPageRoutingModule } from './formd-routing.module';
 
 import { FormdPage } from './formd.page';
-//import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { FormdPage } from './formd.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    //BarcodeScanner,
+    NgxQRCodeModule,
     FormdPageRoutingModule
   ],
   declarations: [FormdPage]

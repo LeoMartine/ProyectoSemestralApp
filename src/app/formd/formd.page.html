@@ -11,11 +11,11 @@
           <form [formGroup]="registroC">
             <ion-item>
               <ion-label position="stacked">INGRESE CLASE</ion-label>
-              <ion-input formControlName="clase"></ion-input>
+              <ion-input formControlName="clase" [(ngModel)]="qrData1"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="stacked">INGRESE FECHA</ion-label>
-              <ion-datetime value="2000-01-01" placeholder="Seleccione Fecha" formControlName="fecha"></ion-datetime>
+              <ion-datetime value="2000-01-01" placeholder="Seleccione Fecha" formControlName="fecha" [(ngModel)]="qrData2"></ion-datetime>
             </ion-item>
             <ion-item>
               <ion-label position="stacked">INGRESE INICIO</ion-label>
@@ -24,18 +24,18 @@
             <ion-item>
               <ion-label position="stacked">INGRESE TERMINO</ion-label>
               <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z" formControlName="horaT"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-card *ngIf="crearCod">
+                <ngx-qrcode [value]="crearCod"></ngx-qrcode>
+                <ion-card-content>
+                  <p>El QR de la clase es: {{crearCod}}</p>
+                </ion-card-content>
+              </ion-card>
             </ion-item><br>
             <ion-button shape="round" expand="block" color="secondary" (click)="guardar()">Registrar</ion-button><br>
             <ion-button routerLink="/menu" shape="round" expand="block" color="danger">Volver</ion-button>
-          </form><br>
-          <ion-item>
-            <ion-card *ngIf="crearCod">
-              <ngx-qrcode [qrc-value]="crearCod"></ngx-qrcode>
-              <ion-card-content>
-                El QR de la clase es: {{crearCod}}
-              </ion-card-content>
-            </ion-card>
-          </ion-item>
+          </form>
         </ion-col>
       </ion-row>
     </div>
