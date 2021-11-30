@@ -45,6 +45,10 @@ const routes: Routes = [
     path: 'menu2',
     loadChildren: () => import('./menu2/menu2.module').then( m => m.Menu2PageModule)
   },
+  {
+    path: 'formd',
+    loadChildren: () => import('./formd/formd.module').then( m => m.FormdPageModule)
+  },
 
 
 ];

@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MenuPageRoutingModule } from './menu-routing.module';
+import { FormdPageRoutingModule } from './formd-routing.module';
 
-import { MenuPage } from './menu.page';
+import { FormdPage } from './formd.page';
 //import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
@@ -16,8 +16,8 @@ import { MenuPage } from './menu.page';
     IonicModule,
     ReactiveFormsModule,
     //BarcodeScanner,
-    MenuPageRoutingModule
+    FormdPageRoutingModule
   ],
-  declarations: [MenuPage]
+  declarations: [FormdPage]
 })
-export class MenuPageModule {}
+export class FormdPageModule {}

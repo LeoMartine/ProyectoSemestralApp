@@ -31,6 +31,7 @@ export class MenuPage implements OnInit {
   ngOnInit() {
   }
 
+  
   async logout()
   {
     localStorage.removeItem('ingresado');
