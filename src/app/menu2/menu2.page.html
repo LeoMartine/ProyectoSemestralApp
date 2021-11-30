@@ -8,14 +8,16 @@
   <div id="container">
     <br><ion-label>Bienvenido, {{this.s}}</ion-label>
     <ion-button shape="round" size ="large" expand="block" color="secondary" (click)="asistenciaClases()">Escanear Clase</ion-button>
-    <div *ngIf="datoscan">
-      <p>
-        Contendido obtenido: <b>{{datoscan}}</b>
-      </p>
-    </div>
-    <div>
-      <p id="crono">{{dia}} : {{hora}} : {{minutos}}</p>
-    </div>
+    <ion-card>
+      <div *ngIf="datoscan">
+        <p>
+          Clase en Curso: <b>{{c}}</b>
+        </p>
+      </div>
+      <div>
+        <p id="crono">{{dia}} : {{hora}} : {{minutos}}</p>
+      </div>
+    </ion-card>
     <ion-button shape="round" size ="large" expand="block" color="secondary" (click)="stop()">Terminar Clase</ion-button>
     <ion-button shape="round" size ="large" expand="block" color="danger" (click)="logout()">Cerrar Sesion</ion-button>
     <br>

@@ -21,7 +21,7 @@ export class Menu2Page implements OnInit {
   public contador:any;
 
   datoscan: {};
-
+  c: any;
   usser: any;
   s: any;
   constructor(public alertController: AlertController, private router: Router, private activateRoute: ActivatedRoute,
@@ -45,8 +45,8 @@ export class Menu2Page implements OnInit {
   async asistenciaClases()
   {
     this.barcodeScanner.scan().then(barcodeData => {
+      var c = JSON.stringify(this.datoscan);
       this.datoscan = barcodeData;
-      var c = this.datoscan;
       if(this.contador == undefined)
       {
         this.contador = setInterval( ()=>
@@ -86,7 +86,7 @@ export class Menu2Page implements OnInit {
       var clase = {
         datos: this.datoscan
       }
-      localStorage.setItem(JSON.stringify(c), JSON.stringify(clase));
+      localStorage.setItem(c, JSON.stringify(clase));
       //const alert = await this.alertController.create({
         //header: 'Datos correctos',
         //buttons: ['Aceptar']
