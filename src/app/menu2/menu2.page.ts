@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { ApiTokenService } from '../servicios/api-token.service';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+
 
 @Component({
   selector: 'app-menu2',
@@ -18,10 +20,13 @@ export class Menu2Page implements OnInit {
   public segundos:number = 0;
   public contador:any;
 
+  datoscan: {};
+
   usser: any;
   s: any;
   constructor(public alertController: AlertController, private router: Router, private activateRoute: ActivatedRoute,
-    public toastController: ToastController, public api: ApiTokenService) {
+    public toastController: ToastController, public api: ApiTokenService, private barcodeScanner: BarcodeScanner
+    ) {
     this.activateRoute.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         //let data = this.router.getCurrentNavigation().extras.state.usuar;
@@ -39,48 +44,62 @@ export class Menu2Page implements OnInit {
 
   async asistenciaClases()
   {
-    if(this.contador == undefined)
-    {
-      this.contador = setInterval( ()=>
+    this.barcodeScanner.scan().then(barcodeData => {
+      this.datoscan = barcodeData;
+      var c = this.datoscan;
+      if(this.contador == undefined)
       {
-        this.segundos +=0.25;
-        if(this.segundos == 60)
+        this.contador = setInterval( ()=>
         {
-          this.segundos = 0;
-          this.minutos +=1;
-          if(this.minutos == 60)
+          this.segundos +=0.25;
+          if(this.segundos == 60)
           {
-            this.minutos = 0;
-            this.hora +=1;
-            if(this.hora == 24)
+            this.segundos = 0;
+            this.minutos +=1;
+            if(this.minutos == 60)
             {
-              this.hora = 0;
-              this.dia += 1;
-              if(this.dia == 30)
+              this.minutos = 0;
+              this.hora +=1;
+              if(this.hora == 24)
               {
-                this.dia = 0;
+                this.hora = 0;
+                this.dia += 1;
+                if(this.dia == 30)
+                {
+                  this.dia = 0;
+                }
               }
             }
           }
-        }
-      })
-    }
-    var a = JSON.parse(localStorage.getItem('login'));
-    var nom = a.nombre+' '+a.apellidos;
-    var asis = {
-      nombre: nom,
-      correo: a.correo,
-      token_equipo: '1000300180'
-    }
-    this.api.postConfirmarAsistencia(asis).subscribe((res => {
-      console.log(res);
-    }))
-    const alert = await this.alertController.create({
-      header: 'Datos Enviados',
-      buttons: ['Aceptar']
+        })
+      }
+      var a = JSON.parse(localStorage.getItem('login'));
+      var nom = a.nombre+' '+a.apellidos;
+      var asis = {
+        nombre: nom,
+        correo: a.correo,
+        token_equipo: '1000300180'
+      }
+      this.api.postConfirmarAsistencia(asis).subscribe((res => {
+        console.log(res);
+      }))
+      var clase = {
+        datos: this.datoscan
+      }
+      localStorage.setItem(JSON.stringify(c), JSON.stringify(clase));
+      //const alert = await this.alertController.create({
+        //header: 'Datos correctos',
+        //buttons: ['Aceptar']
+      //})
+      //await alert.present();
+      this.mensajeToast("Se ha registrado su asistencia")
     })
-    await alert.present();
+    .catch(err => {
+      console.log("Error", err);
+      this.mensajeToast("Hubo un error al registrar")
+    })
   }
+
 
   stop()
   {
@@ -92,6 +111,7 @@ export class Menu2Page implements OnInit {
     this.segundos = 0;
     this.contador = null;
   }
+
   async logout()
   {
     localStorage.removeItem('ingresadoA');
@@ -105,6 +125,18 @@ export class Menu2Page implements OnInit {
     await alert.present();
     console.log('Adiosin');
     this.router.navigate(['/home']);
+  }
+
+  async mensajeToast(message:string, duration?:number)
+  {
+    const toast = await this.toastController.create(
+      {
+        message :message,
+        duration: duration?duration:3000
+       }
+    );
+
+    toast.present();
   }
 
 }
