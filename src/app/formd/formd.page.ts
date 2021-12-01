@@ -16,7 +16,7 @@ export class FormdPage implements OnInit {
   usser: any;
   s: any;
   registroC: FormGroup;
-  crearCod: null;
+  crearCod: any;
   qrData1: null;
   qrData2: null;
   constructor(public alertController: AlertController, private router: Router, private activateRoute: ActivatedRoute,
@@ -62,6 +62,6 @@ export class FormdPage implements OnInit {
       buttons: ['Aceptar']
     })
     await alert.present();
-    this.crearCod = this.qrData1;
+    this.crearCod = this.qrData1 + ' '+ this.qrData2;
   }
 }
